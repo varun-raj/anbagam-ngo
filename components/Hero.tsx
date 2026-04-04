@@ -1,5 +1,21 @@
+"use client";
 // components/Hero.tsx
+import { useEffect, useRef } from "react";
+
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (!entry.isIntersecting) video.pause(); },
+      { threshold: 0.2 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden px-6 py-12 sm:py-16"
@@ -16,7 +32,6 @@ export function Hero() {
       />
 
       <div className="relative max-w-5xl mx-auto">
-        {/* Two-col on desktop, stacked on mobile */}
         <div className="flex flex-col lg:flex-row items-center gap-10">
 
           {/* Left: text + stats */}
@@ -52,6 +67,7 @@ export function Hero() {
           <div className="w-full lg:w-[480px] flex-shrink-0">
             <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
               <video
+                ref={videoRef}
                 controls
                 playsInline
                 className="w-full block"
