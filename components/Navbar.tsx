@@ -5,14 +5,26 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-blue-100 shadow-sm">
       <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-        <Image
-          src="https://anbagam.org/anbagam-logo.png?v=2.0.01-of-7-nov-2025"
-          alt="Anbagam"
-          width={180}
-          height={50}
-          className="h-10 w-auto object-contain"
-          unoptimized
-        />
+        {/* Logo + title */}
+        <div className="flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="Anbagam Logo"
+            width={44}
+            height={44}
+            className="w-11 h-11 object-contain flex-shrink-0"
+          />
+          <div>
+            <p className="font-bold text-blue-900 text-base leading-tight tracking-tight">
+              Anbagam
+            </p>
+            <p className="text-xs text-blue-500 font-medium leading-tight">
+              An Initiative By TERDOD
+            </p>
+          </div>
+        </div>
+
+        {/* Right: visit website */}
         <a
           href="https://www.anbagam.org/"
           target="_blank"
