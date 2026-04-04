@@ -1,20 +1,39 @@
 // components/Footer.tsx
+import Image from "next/image";
+
 export function Footer() {
   return (
-    <footer className="bg-stone-800 text-stone-400 py-10 px-4">
-      <div className="max-w-5xl mx-auto text-center">
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center text-white font-bold text-sm">
-            A
-          </div>
-          <span className="font-semibold text-stone-200">Anbagam</span>
+    <footer
+      className="py-12 px-6 text-blue-200"
+      style={{ background: "linear-gradient(135deg, #0a1e40 0%, #0f2b5b 100%)" }}
+    >
+      <div className="max-w-3xl mx-auto text-center">
+        <Image
+          src="https://anbagam.org/anbagam-logo.png?v=2.0.01-of-7-nov-2025"
+          alt="Anbagam Logo"
+          width={64}
+          height={64}
+          className="h-12 w-auto object-contain mx-auto mb-4 opacity-90"
+          unoptimized
+        />
+        <h3
+          className="text-xl font-bold text-white mb-1"
+          style={{ fontFamily: "'Noto Serif', serif" }}
+        >
+          Anbagam
+        </h3>
+        <p className="text-xs text-blue-400 uppercase tracking-widest mb-4">
+          An Initiative by TERDOD
+        </p>
+        <p
+          className="text-sm text-blue-300 italic max-w-sm mx-auto"
+          style={{ fontFamily: "'Noto Serif', serif" }}
+        >
+          &ldquo;Restoring dignity and transforming lives&rdquo;
+        </p>
+        <div className="mt-6 pt-6 border-t border-blue-900/60 text-xs text-blue-500">
+          © {new Date().getFullYear()} Anbagam · TERDOD. Operating since 1999.
         </div>
-        <p className="text-sm">
-          Serving nutritious meals to those who need it most — every single day.
-        </p>
-        <p className="text-xs mt-4 text-stone-600">
-          © {new Date().getFullYear()} Anbagam. All rights reserved.
-        </p>
       </div>
     </footer>
   );

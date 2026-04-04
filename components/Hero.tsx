@@ -1,37 +1,57 @@
 // components/Hero.tsx
-import { Badge } from "@/components/ui/badge";
-
 export function Hero() {
   return (
-    <section className="bg-gradient-to-br from-amber-50 via-stone-50 to-teal-50 py-16 px-4">
-      <div className="max-w-3xl mx-auto text-center">
-        <Badge className="mb-4 bg-amber-100 text-amber-700 hover:bg-amber-100 border-amber-200">
-          Community Care
-        </Badge>
-        <h2 className="text-4xl font-bold text-stone-800 mb-4 leading-tight">
-          Feed a Family,<br />
-          <span className="text-amber-600">Change a Life</span>
+    <section
+      className="relative overflow-hidden py-20 px-6"
+      style={{
+        background: "linear-gradient(135deg, #0f2b5b 0%, #1a4a9e 55%, #2563eb 100%)",
+      }}
+    >
+      {/* Subtle dot pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+      <div className="relative max-w-3xl mx-auto text-center">
+        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-blue-200 mb-5 border border-blue-400/40 px-4 py-1.5 rounded-full">
+          25 Years of Service · Since 1999
+        </span>
+        <h2
+          className="text-5xl font-bold text-white mb-5 leading-tight"
+          style={{ fontFamily: "'Noto Serif', serif" }}
+        >
+          Service to Humanity,<br />
+          <em className="not-italic text-blue-200">Service to God</em>
         </h2>
-        <p className="text-stone-600 text-lg max-w-xl mx-auto leading-relaxed">
-          Anbagam runs three care centers across Chennai, providing nutritious
-          daily meals to over 370 residents. Your donation directly feeds a
-          meal for the day.
+        <p className="text-blue-100 text-lg max-w-xl mx-auto leading-relaxed">
+          We assist the abandoned in living life with dignity through quality
+          health, nutritional care and occupational therapy — across three
+          centers in Chennai.
         </p>
-        <div className="mt-8 flex justify-center gap-8">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-teal-700">370+</div>
-            <div className="text-sm text-stone-500">Residents</div>
-          </div>
-          <div className="w-px bg-stone-200" />
-          <div className="text-center">
-            <div className="text-3xl font-bold text-teal-700">3</div>
-            <div className="text-sm text-stone-500">Centers</div>
-          </div>
-          <div className="w-px bg-stone-200" />
-          <div className="text-center">
-            <div className="text-3xl font-bold text-teal-700">4</div>
-            <div className="text-sm text-stone-500">Meals Daily</div>
-          </div>
+
+        <div className="mt-10 flex justify-center gap-10">
+          {[
+            { value: "370+", label: "Residents" },
+            { value: "3", label: "Care Centers" },
+            { value: "4", label: "Meals Daily" },
+            { value: "25", label: "Years of Service" },
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div
+                className="text-3xl font-bold text-white"
+                style={{ fontFamily: "'Noto Serif', serif" }}
+              >
+                {stat.value}
+              </div>
+              <div className="text-xs text-blue-300 uppercase tracking-wider mt-1">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

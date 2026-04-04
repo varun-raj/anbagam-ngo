@@ -1,34 +1,58 @@
-// components/MealCard.tsx
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+// components/MealCard.tsx — horizontal list row
 import { buildUpiLink, type Meal } from "@/lib/config";
 
 interface MealCardProps {
   meal: Meal;
+  isLast?: boolean;
 }
 
-export function MealCard({ meal }: MealCardProps) {
+export function MealCard({ meal, isLast = false }: MealCardProps) {
   const upiLink = buildUpiLink(meal.amount, meal.note);
 
   return (
-    <Card className="group hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 border-stone-100">
-      <CardContent className="p-5">
-        <div className="flex items-start justify-between mb-3">
-          <span className="text-3xl">{meal.icon}</span>
-          <span className="text-xs text-stone-400 bg-stone-50 px-2 py-1 rounded-full">
-            daily
-          </span>
-        </div>
-        <h4 className="font-semibold text-stone-700 mb-1">{meal.name}</h4>
-        <p className="text-2xl font-bold text-teal-700 mb-4">
+    <div
+      className={`flex items-center gap-4 py-4 px-5 group hover:bg-blue-50/60 transition-colors duration-150 ${
+        !isLast ? "border-b border-blue-100" : ""
+      }`}
+    >
+      {/* Icon bubble */}
+      <div className="flex-shrink-0 w-11 h-11 rounded-full bg-blue-100 flex items-center justify-center text-xl">
+        {meal.icon}
+      </div>
+
+      {/* Name */}
+      <div className="flex-1 min-w-0">
+        <span
+          className="font-semibold text-blue-900 text-base"
+          style={{ fontFamily: "'Noto Serif', serif" }}
+        >
+          {meal.name}
+        </span>
+        <span className="block text-xs text-blue-400 mt-0.5 uppercase tracking-wide">
+          Daily contribution
+        </span>
+      </div>
+
+      {/* Amount */}
+      <div
+        className="flex-shrink-0 text-right mr-4"
+        style={{ fontFamily: "'Noto Serif', serif" }}
+      >
+        <span className="text-2xl font-bold text-blue-800">
           ₹{meal.amount.toLocaleString("en-IN")}
-        </p>
-        <a href={upiLink}>
-          <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium">
-            Donate via UPI
-          </Button>
-        </a>
-      </CardContent>
-    </Card>
+        </span>
+      </div>
+
+      {/* Donate button */}
+      <a
+        href={upiLink}
+        className="flex-shrink-0 inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-150 shadow-sm hover:shadow-md"
+      >
+        Donate
+        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
   );
 }

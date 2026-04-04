@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Anbagam — Nourishing Lives",
-  description: "Support Anbagam NGO by donating a meal for our 370+ residents across 3 care centers in Chennai.",
+  title: "Anbagam — Restoring Dignity, Transforming Lives",
+  description: "Support Anbagam NGO — donate a daily meal for our 370+ residents across 3 care centers in Chennai. An initiative by TERDOD.",
 };
 
 export default function RootLayout({
@@ -16,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-stone-50 antialiased`}>
+      <body className="antialiased" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
         {children}
       </body>
     </html>
