@@ -33,7 +33,7 @@ export function Hero() {
               health, nutritional care and occupational therapy — across three
               centers in Chennai.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="flex flex-row flex-wrap justify-center lg:justify-start gap-x-6 gap-y-3">
               {[
                 { value: "370+", label: "Residents" },
                 { value: "3",    label: "Care Centers" },
