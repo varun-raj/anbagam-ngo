@@ -1,36 +1,32 @@
-// components/ImpactSection.tsx — B&W portrait with mission quote
+// components/ImpactSection.tsx
 import Image from "next/image";
 
 export function ImpactSection() {
   return (
-    <section className="relative overflow-hidden bg-slate-900" style={{ minHeight: "360px" }}>
-      {/* Portrait image */}
-      <Image
-        src="/media/portrait.jpg"
-        alt="Anbagam resident"
-        fill
-        className="object-cover object-center opacity-40"
-        sizes="100vw"
-      />
+    <section className="bg-white border-b border-blue-50">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center gap-8">
 
-      {/* Gradient overlay — darker on left for text, fades right */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(10,30,64,0.92) 0%, rgba(10,30,64,0.70) 50%, rgba(10,30,64,0.40) 100%)",
-        }}
-      />
+        {/* Portrait image */}
+        <div className="flex-shrink-0 w-40 h-48 sm:w-44 sm:h-52 rounded-xl overflow-hidden shadow-md">
+          <Image
+            src="/media/portrait.jpg"
+            alt="Anbagam resident"
+            width={176}
+            height={208}
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-      <div className="relative max-w-3xl mx-auto px-6 py-16 sm:py-20">
+        {/* Text */}
         <blockquote>
-          <p className="text-2xl sm:text-3xl font-semibold text-white leading-snug max-w-xl mb-6">
+          <p className="text-xl sm:text-2xl font-semibold text-blue-900 leading-snug mb-3">
             &ldquo;We assist the abandoned in living life with dignity.&rdquo;
           </p>
-          <footer className="text-blue-300 text-sm uppercase tracking-widest">
+          <footer className="text-sm text-slate-400 uppercase tracking-widest">
             Anbagam · An Initiative by TERDOD
           </footer>
         </blockquote>
+
       </div>
     </section>
   );
