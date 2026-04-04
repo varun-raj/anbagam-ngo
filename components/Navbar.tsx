@@ -18,12 +18,12 @@ export function Navbar() {
             <h1 className="font-bold text-blue-900 text-lg leading-none tracking-tight">
               Anbagam
             </h1>
-            <p className="text-xs text-blue-400 tracking-wide uppercase font-medium mt-0.5">
+            <p className="text-xs text-blue-600 tracking-wide uppercase font-medium mt-0.5">
               An Initiative by TERDOD
             </p>
           </div>
         </div>
-        <span className="hidden sm:block text-xs text-blue-300 italic">
+        <span className="hidden sm:block text-xs text-slate-500 italic">
           Restoring dignity &amp; transforming lives
         </span>
       </div>

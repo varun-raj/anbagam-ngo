@@ -27,7 +27,7 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
         >
           {meal.name}
         </span>
-        <span className="block text-xs text-blue-400 mt-0.5 uppercase tracking-wide">
+        <span className="block text-xs text-slate-500 mt-0.5 uppercase tracking-wide">
           Daily contribution
         </span>
       </div>

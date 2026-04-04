@@ -17,10 +17,10 @@ export function Footer() {
           unoptimized
         />
         <h3 className="text-xl font-bold text-white mb-1">Anbagam</h3>
-        <p className="text-xs text-blue-400 uppercase tracking-widest mb-4">
+        <p className="text-xs text-blue-300 uppercase tracking-widest mb-4">
           An Initiative by TERDOD
         </p>
-        <p className="text-sm text-blue-300 italic max-w-sm mx-auto mb-6">
+        <p className="text-sm text-blue-200 italic max-w-sm mx-auto mb-6">
           &ldquo;Restoring dignity and transforming lives&rdquo;
         </p>
 
@@ -57,7 +57,7 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="pt-6 border-t border-blue-900/60 text-xs text-blue-500">
+        <div className="pt-6 border-t border-blue-900/60 text-xs text-blue-300">
           © {new Date().getFullYear()} Anbagam · TERDOD. Operating since 1999.
         </div>
       </div>

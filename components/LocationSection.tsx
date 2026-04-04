@@ -25,11 +25,11 @@ export function LocationSection({ center, index }: LocationSectionProps) {
             >
               {center.name}
             </h3>
-            <span className="text-sm font-medium text-blue-500 bg-blue-100 px-3 py-0.5 rounded-full">
+            <span className="text-sm font-semibold text-blue-700 bg-blue-100 px-3 py-0.5 rounded-full">
               {center.residents} residents
             </span>
           </div>
-          <p className="text-sm text-blue-400 mt-1 flex items-center gap-1">
+          <p className="text-sm text-slate-500 mt-1 flex items-center gap-1">
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
