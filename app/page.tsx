@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ImpactSection } from "@/components/ImpactSection";
-import { GallerySection } from "@/components/GallerySection";
+import { CarouselSection } from "@/components/CarouselSection";
 import { LocationSection } from "@/components/LocationSection";
 import { BankSection } from "@/components/BankSection";
 import { Footer } from "@/components/Footer";
@@ -13,7 +13,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ImpactSection />
-      <GallerySection />
+      <CarouselSection />
       {centers.map((center, i) => (
         <LocationSection key={center.name} center={center} index={i} />
       ))}
