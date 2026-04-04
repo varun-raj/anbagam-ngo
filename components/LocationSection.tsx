@@ -22,7 +22,6 @@ export function LocationSection({ center, index }: LocationSectionProps) {
           <div className="flex items-baseline gap-3 flex-wrap">
             <h3
               className="text-2xl font-bold text-blue-900"
-              style={{ fontFamily: "'Noto Serif', serif" }}
             >
               {center.name}
             </h3>

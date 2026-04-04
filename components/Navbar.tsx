@@ -15,10 +15,7 @@ export function Navbar() {
             unoptimized
           />
           <div>
-            <h1
-              className="font-bold text-blue-900 text-lg leading-none tracking-tight"
-              style={{ fontFamily: "'Noto Serif', serif" }}
-            >
+            <h1 className="font-bold text-blue-900 text-lg leading-none tracking-tight">
               Anbagam
             </h1>
             <p className="text-xs text-blue-400 tracking-wide uppercase font-medium mt-0.5">
@@ -26,7 +23,7 @@ export function Navbar() {
             </p>
           </div>
         </div>
-        <span className="hidden sm:block text-xs text-blue-300 italic" style={{ fontFamily: "'Noto Serif', serif" }}>
+        <span className="hidden sm:block text-xs text-blue-300 italic">
           Restoring dignity &amp; transforming lives
         </span>
       </div>

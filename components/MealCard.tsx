@@ -24,7 +24,6 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
       <div className="flex-1 min-w-0">
         <span
           className="font-semibold text-blue-900 text-base"
-          style={{ fontFamily: "'Noto Serif', serif" }}
         >
           {meal.name}
         </span>
@@ -36,7 +35,6 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
       {/* Amount */}
       <div
         className="flex-shrink-0 text-right mr-4"
-        style={{ fontFamily: "'Noto Serif', serif" }}
       >
         <span className="text-2xl font-bold text-blue-800">
           ₹{meal.amount.toLocaleString("en-IN")}
