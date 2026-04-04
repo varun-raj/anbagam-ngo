@@ -4,15 +4,21 @@ import { useEffect, useRef } from "react";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    const container = containerRef.current;
+    if (!video || !container) return;
+
     const observer = new IntersectionObserver(
-      ([entry]) => { if (!entry.isIntersecting) video.pause(); },
-      { threshold: 0.2 }
+      ([entry]) => {
+        if (!entry.isIntersecting) video.pause();
+      },
+      { threshold: 0.1, rootMargin: "0px" }
     );
-    observer.observe(video);
+
+    observer.observe(container);
     return () => observer.disconnect();
   }, []);
 
@@ -64,7 +70,7 @@ export function Hero() {
           </div>
 
           {/* Right: video */}
-          <div className="w-full lg:w-[480px] flex-shrink-0">
+          <div ref={containerRef} className="w-full lg:w-[480px] flex-shrink-0">
             <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
               <video
                 ref={videoRef}
