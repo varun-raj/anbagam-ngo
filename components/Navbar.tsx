@@ -5,30 +5,25 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-blue-100 shadow-sm">
       <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Image
-            src="https://anbagam.org/anbagam-logo.png?v=2.0.01-of-7-nov-2025"
-            alt="Anbagam"
-            width={180}
-            height={50}
-            className="h-10 w-auto object-contain"
-            unoptimized
-          />
-          <a
-            href="https://www.anbagam.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors"
-          >
-            Visit Website
-            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-            </svg>
-          </a>
-        </div>
-        <span className="hidden sm:block text-xs text-slate-500 italic">
-          Restoring dignity &amp; transforming lives
-        </span>
+        <Image
+          src="https://anbagam.org/anbagam-logo.png?v=2.0.01-of-7-nov-2025"
+          alt="Anbagam"
+          width={180}
+          height={50}
+          className="h-10 w-auto object-contain"
+          unoptimized
+        />
+        <a
+          href="https://www.anbagam.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors"
+        >
+          Visit Website
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+        </a>
       </div>
     </nav>
   );
