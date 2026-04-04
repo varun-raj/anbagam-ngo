@@ -21,7 +21,6 @@ export function Hero() {
         </span>
         <h2
           className="text-3xl sm:text-5xl font-bold text-white mb-5 leading-tight"
-          style={{ fontFamily: "'Noto Serif', serif" }}
         >
           Service to Humanity,<br />
           <em className="not-italic text-blue-200">Service to God</em>
@@ -43,7 +42,6 @@ export function Hero() {
             <div key={i} className="text-center">
               <div
                 className="text-2xl sm:text-3xl font-bold text-white"
-                style={{ fontFamily: "'Noto Serif', serif" }}
               >
                 {stat.value}
               </div>
