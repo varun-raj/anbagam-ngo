@@ -13,6 +13,7 @@ export type Center = {
   name: string;
   location: string;
   residents: number;
+  mapUrl?: string;
   meals: Meal[];
 };
 
@@ -32,6 +33,7 @@ export const centers: Center[] = [
     name: "Anbagam Royapetta",
     location: "Royapetta",
     residents: 60,
+    mapUrl: "https://maps.app.goo.gl/ygxEX1bByX8bo2Hr9",
     meals: [
       { name: "Breakfast", icon: "🌅", amount: 3500, note: "Breakfast+Royapetta" },
       { name: "Lunch",     icon: "🍽️",  amount: 5000, note: "Lunch+Royapetta" },
@@ -43,6 +45,7 @@ export const centers: Center[] = [
     name: "Anbagam Thirunilai",
     location: "Thirunilai",
     residents: 250,
+    mapUrl: "https://maps.app.goo.gl/2W4WGuDhCoBH48PU6",
     meals: [
       { name: "Breakfast", icon: "🌅", amount: 5000,  note: "Breakfast+Thirunilai" },
       { name: "Lunch",     icon: "🍽️",  amount: 12500, note: "Lunch+Thirunilai" },

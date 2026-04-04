@@ -7,12 +7,12 @@ export function ImpactSection() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center gap-8">
 
         {/* Portrait image */}
-        <div className="flex-shrink-0 w-40 h-48 sm:w-44 sm:h-52 rounded-xl overflow-hidden shadow-md">
+        <div className="flex-shrink-0 w-48 h-60 sm:w-56 sm:h-72 rounded-xl overflow-hidden shadow-xl">
           <Image
             src="/media/portrait.jpg"
             alt="Anbagam resident"
-            width={176}
-            height={208}
+            width={224}
+            height={288}
             className="w-full h-full object-cover"
           />
         </div>

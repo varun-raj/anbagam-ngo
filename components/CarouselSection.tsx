@@ -1,7 +1,7 @@
 "use client";
 // components/CarouselSection.tsx
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const ALL = Array.from({ length: 18 }, (_, i) => `/media/gallery-${String(i + 1).padStart(2, "0")}.jpg`);
 
@@ -10,6 +10,7 @@ const ROW2 = [...ALL.slice(9, 18), ...ALL.slice(9, 18)];
 
 export function CarouselSection() {
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const close  = useCallback(() => setLightbox(null), []);
   const prev   = useCallback(() => setLightbox(i => i === null ? null : (i + ALL.length - 1) % ALL.length), []);
@@ -35,6 +36,20 @@ export function CarouselSection() {
 
   const openAt = (rowOffset: number, idx: number) => setLightbox((rowOffset + idx) % ALL.length);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent, rowOffset: number, idx: number) => {
+    if (!touchStart.current) return;
+    const dx = Math.abs(e.changedTouches[0].clientX - touchStart.current.x);
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStart.current.y);
+    if (dx < 10 && dy < 10) {
+      openAt(rowOffset, idx);
+    }
+    touchStart.current = null;
+  };
+
   return (
     <section className="py-12 bg-slate-900 overflow-hidden">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 mb-6">
@@ -49,6 +64,9 @@ export function CarouselSection() {
             <button
               key={i}
               onClick={() => openAt(0, i % 9)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={(e) => handleTouchEnd(e, 0, i % 9)}
+              style={{ touchAction: "manipulation" }}
               className="flex-shrink-0 w-40 h-28 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
             >
               <Image
@@ -70,6 +88,9 @@ export function CarouselSection() {
             <button
               key={i}
               onClick={() => openAt(9, i % 9)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={(e) => handleTouchEnd(e, 9, i % 9)}
+              style={{ touchAction: "manipulation" }}
               className="flex-shrink-0 w-40 h-28 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
             >
               <Image
@@ -89,6 +110,16 @@ export function CarouselSection() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
           onClick={close}
+          onTouchStart={(e) => { touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }; }}
+          onTouchEnd={(e) => {
+            if (!touchStart.current) return;
+            const dx = e.changedTouches[0].clientX - touchStart.current.x;
+            const dy = Math.abs(e.changedTouches[0].clientY - touchStart.current.y);
+            touchStart.current = null;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > dy) {
+              dx < 0 ? next() : prev();
+            }
+          }}
         >
           {/* Image container — stop propagation so clicking image doesn't close */}
           <div
