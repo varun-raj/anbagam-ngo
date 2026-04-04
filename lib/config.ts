@@ -1,6 +1,6 @@
 // lib/config.ts
 
-export const UPI_ID = "your-upi-id@bank"; // Replace with actual UPI ID
+export const UPI_ID = "mpmohamedrafi617317.rzp@rxairtel";
 
 export type Meal = {
   name: string;
