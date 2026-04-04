@@ -2,7 +2,7 @@
 export function Hero() {
   return (
     <section
-      className="relative overflow-hidden py-20 px-6"
+      className="relative overflow-hidden py-14 sm:py-20 px-6"
       style={{
         background: "linear-gradient(135deg, #0f2b5b 0%, #1a4a9e 55%, #2563eb 100%)",
       }}
@@ -11,8 +11,7 @@ export function Hero() {
       <div
         className="absolute inset-0 opacity-10"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -21,28 +20,29 @@ export function Hero() {
           25 Years of Service · Since 1999
         </span>
         <h2
-          className="text-5xl font-bold text-white mb-5 leading-tight"
+          className="text-3xl sm:text-5xl font-bold text-white mb-5 leading-tight"
           style={{ fontFamily: "'Noto Serif', serif" }}
         >
           Service to Humanity,<br />
           <em className="not-italic text-blue-200">Service to God</em>
         </h2>
-        <p className="text-blue-100 text-lg max-w-xl mx-auto leading-relaxed">
+        <p className="text-blue-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
           We assist the abandoned in living life with dignity through quality
           health, nutritional care and occupational therapy — across three
           centers in Chennai.
         </p>
 
-        <div className="mt-10 flex justify-center gap-10">
+        {/* Stats — 2×2 on mobile, single row on sm+ */}
+        <div className="mt-10 grid grid-cols-2 sm:flex sm:justify-center gap-6 sm:gap-10">
           {[
             { value: "370+", label: "Residents" },
-            { value: "3", label: "Care Centers" },
-            { value: "4", label: "Meals Daily" },
-            { value: "25", label: "Years of Service" },
+            { value: "3",    label: "Care Centers" },
+            { value: "4",    label: "Meals Daily" },
+            { value: "25",   label: "Years of Service" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div
-                className="text-3xl font-bold text-white"
+                className="text-2xl sm:text-3xl font-bold text-white"
                 style={{ fontFamily: "'Noto Serif', serif" }}
               >
                 {stat.value}

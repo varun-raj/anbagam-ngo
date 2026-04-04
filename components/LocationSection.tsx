@@ -15,7 +15,7 @@ const accentColors = [
 
 export function LocationSection({ center, index }: LocationSectionProps) {
   return (
-    <section className="py-12 px-6 bg-slate-50">
+    <section className="py-10 sm:py-12 px-4 sm:px-6 bg-slate-50">
       <div className="max-w-3xl mx-auto">
         {/* Section header */}
         <div className={`border-l-4 pl-5 mb-6 ${accentColors[index % accentColors.length]}`}>
