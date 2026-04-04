@@ -49,8 +49,8 @@ export const centers: Center[] = [
     mapUrl: "https://maps.app.goo.gl/2W4WGuDhCoBH48PU6",
     meals: [
       { name: "Breakfast", icon: "🌅", amount: 5000,  note: "Breakfast+Thirunilai" },
-      { name: "Lunch",     icon: "🍽️",  amount: 12500, note: "Lunch+Thirunilai" },
-      { name: "Dinner",    icon: "🌙", amount: 10000, note: "Dinner+Thirunilai" },
+      { name: "Lunch",     icon: "🍽️",  amount: 10000, note: "Lunch+Thirunilai" },
+      { name: "Dinner",    icon: "🌙", amount: 6000, note: "Dinner+Thirunilai" },
       { name: "Snacks",    icon: "🍊", amount: 3000,  note: "Snacks+Thirunilai" },
     ],
   },
