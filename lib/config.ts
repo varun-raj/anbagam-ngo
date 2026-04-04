@@ -22,6 +22,7 @@ export const centers: Center[] = [
     name: "Anbagam Otteri",
     location: "Otteri",
     residents: 60,
+    mapUrl: "https://maps.app.goo.gl/j62saTVfFysDU7E47",
     meals: [
       { name: "Breakfast", icon: "🌅", amount: 3500, note: "Breakfast+Otteri" },
       { name: "Lunch",     icon: "🍽️",  amount: 5000, note: "Lunch+Otteri" },
