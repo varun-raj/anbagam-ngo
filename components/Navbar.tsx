@@ -15,7 +15,7 @@ export function Navbar() {
             className="w-11 h-11 object-contain flex-shrink-0"
           />
           <div>
-            <p className="font-bold text-blue-900 text-base leading-tight tracking-tight">
+            <p className="font-bold text-blue-900 text-base leading-tight tracking-widest uppercase">
               Anbagam
             </p>
             <p className="text-xs text-blue-500 font-medium leading-tight">

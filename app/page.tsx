@@ -1,9 +1,9 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ImpactSection } from "@/components/ImpactSection";
-import { VideoSection } from "@/components/VideoSection";
-import { LocationSection } from "@/components/LocationSection";
 import { GallerySection } from "@/components/GallerySection";
+import { LocationSection } from "@/components/LocationSection";
+import { BankSection } from "@/components/BankSection";
 import { Footer } from "@/components/Footer";
 import { centers } from "@/lib/config";
 
@@ -13,11 +13,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ImpactSection />
-      <VideoSection />
+      <GallerySection />
       {centers.map((center, i) => (
         <LocationSection key={center.name} center={center} index={i} />
       ))}
-      <GallerySection />
+      <BankSection />
       <Footer />
     </main>
   );

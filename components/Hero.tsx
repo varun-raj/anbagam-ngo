@@ -2,7 +2,7 @@
 export function Hero() {
   return (
     <section
-      className="relative overflow-hidden py-14 sm:py-20 px-6"
+      className="relative overflow-hidden px-6 py-12 sm:py-16"
       style={{
         background: "linear-gradient(135deg, #0f2b5b 0%, #1a4a9e 55%, #2563eb 100%)",
       }}
@@ -14,31 +14,52 @@ export function Hero() {
           backgroundSize: "28px 28px",
         }}
       />
-      <div className="relative max-w-3xl mx-auto text-center">
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-blue-200 mb-5 border border-blue-400/40 px-4 py-1.5 rounded-full">
-          25 Years of Service · Since 1999
-        </span>
-        <h2 className="text-3xl sm:text-5xl font-bold text-white mb-5 leading-tight">
-          Service to Humanity,<br />
-          <em className="not-italic text-blue-200">Service to God</em>
-        </h2>
-        <p className="text-blue-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-          We assist the abandoned in living life with dignity through quality
-          health, nutritional care and occupational therapy — across three
-          centers in Chennai.
-        </p>
-        <div className="mt-10 grid grid-cols-2 sm:flex sm:justify-center gap-6 sm:gap-10">
-          {[
-            { value: "370+", label: "Residents" },
-            { value: "3",    label: "Care Centers" },
-            { value: "4",    label: "Meals Daily" },
-            { value: "25",   label: "Years of Service" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
-              <div className="text-xs text-blue-300 uppercase tracking-wider mt-1">{stat.label}</div>
+
+      <div className="relative max-w-5xl mx-auto">
+        {/* Two-col on desktop, stacked on mobile */}
+        <div className="flex flex-col lg:flex-row items-center gap-10">
+
+          {/* Left: text + stats */}
+          <div className="flex-1 text-center lg:text-left">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-blue-200 mb-5 border border-blue-400/40 px-4 py-1.5 rounded-full">
+              25 Years of Service · Since 1999
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 leading-tight">
+              Service to Humanity,<br />
+              <em className="not-italic text-blue-200">Service to God</em>
+            </h2>
+            <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+              We assist the abandoned in living life with dignity through quality
+              health, nutritional care and occupational therapy — across three
+              centers in Chennai.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+              {[
+                { value: "370+", label: "Residents" },
+                { value: "3",    label: "Care Centers" },
+                { value: "4",    label: "Meals Daily" },
+                { value: "25",   label: "Years of Service" },
+              ].map((stat, i) => (
+                <div key={i} className="text-center lg:text-left">
+                  <div className="text-2xl font-bold text-white">{stat.value}</div>
+                  <div className="text-xs text-blue-300 uppercase tracking-wider mt-0.5">{stat.label}</div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Right: video */}
+          <div className="w-full lg:w-[480px] flex-shrink-0">
+            <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <video
+                controls
+                playsInline
+                className="w-full block"
+                src="/media/hero.mp4"
+              />
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
