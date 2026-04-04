@@ -4,7 +4,7 @@ import Image from "next/image";
 export function ImpactSection() {
   return (
     <section className="bg-white border-b border-blue-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center gap-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-center gap-8">
 
         {/* Portrait image */}
         <div className="flex-shrink-0 w-48 h-60 sm:w-56 sm:h-72 rounded-xl overflow-hidden shadow-xl">

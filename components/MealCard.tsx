@@ -1,5 +1,5 @@
 // components/MealCard.tsx
-import { buildUpiLink, type Meal } from "@/lib/config";
+import { buildUpiLink, UPI_ID, type Meal } from "@/lib/config";
 
 interface MealCardProps {
   meal: Meal;
@@ -47,6 +47,9 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
             Daily contribution
           </p>
         </div>
+        <p className="col-start-2 text-[11px] text-slate-400 mt-1">
+          UPI: {UPI_ID}
+        </p>
       </div>
 
       {/* ── Desktop layout: single row ── */}
@@ -60,6 +63,9 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
           </p>
           <p className="text-xs text-slate-500 uppercase tracking-wide mt-0.5">
             Daily contribution
+          </p>
+          <p className="text-[11px] text-slate-400 mt-0.5">
+            UPI: {UPI_ID}
           </p>
         </div>
         <span className="flex-shrink-0 text-xl font-bold text-blue-800 mr-2">

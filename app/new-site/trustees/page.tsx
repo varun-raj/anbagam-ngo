@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: "noindex, nofollow",
+};
+
 const founder = {
   name: "M.P. Mohammed Rafi",
   role: "Founder & Trustee",

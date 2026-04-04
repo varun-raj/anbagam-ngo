@@ -7,22 +7,109 @@ export function Footer() {
       className="py-12 px-6 text-blue-200"
       style={{ background: "linear-gradient(135deg, #0a1e40 0%, #0f2b5b 100%)" }}
     >
-      <div className="max-w-3xl mx-auto text-center">
-        <Image
-          src="https://anbagam.org/anbagam-logo.png?v=2.0.01-of-7-nov-2025"
-          alt="Anbagam Logo"
-          width={64}
-          height={64}
-          className="h-12 w-auto object-contain mx-auto mb-4 opacity-90"
-          unoptimized
-        />
-        <h3 className="text-xl font-bold text-white mb-1">Anbagam</h3>
-        <p className="text-xs text-blue-300 uppercase tracking-widest mb-4">
-          An Initiative by TERDOD
-        </p>
-        <p className="text-sm text-blue-200 italic max-w-sm mx-auto mb-6">
-          &ldquo;Restoring dignity and transforming lives&rdquo;
-        </p>
+      <div className="max-w-5xl mx-auto">
+        {/* Top: brand + 3-col links */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+          {/* Brand */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-3 mb-3">
+              <Image
+                src="https://anbagam.org/anbagam-logo.png?v=2.0.01-of-7-nov-2025"
+                alt="Anbagam Logo"
+                width={64}
+                height={64}
+                className="h-10 w-auto object-contain opacity-90"
+                unoptimized
+              />
+              <div>
+                <h3 className="text-base font-bold text-white leading-tight">Anbagam</h3>
+                <p className="text-[10px] text-blue-300 uppercase tracking-widest">
+                  An Initiative by TERDOD
+                </p>
+              </div>
+            </div>
+            <p className="text-sm text-blue-200/70 italic max-w-xs">
+              &ldquo;Restoring dignity and transforming lives&rdquo;
+            </p>
+          </div>
+
+          {/* About Us */}
+          <div>
+            <h4 className="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-4">About Us</h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Our Story", href: "https://anbagam.org/our-story/" },
+                { label: "Our Mission", href: "https://anbagam.org/our-mission/" },
+                { label: "Trustees", href: "https://anbagam.org/trustees/" },
+                { label: "What We Do", href: "https://anbagam.org/what-we-do/" },
+                { label: "Awards", href: "https://anbagam.org/awards-and-recognition/" },
+                { label: "Infrastructure", href: "https://anbagam.org/infrastructure/" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-200/70 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Centers & Updates */}
+          <div>
+            <h4 className="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-4">Centers</h4>
+            <ul className="space-y-2.5 mb-6">
+              {[
+                { label: "Royapettah", href: "https://anbagam.org/royapettah/" },
+                { label: "Vichur (Thirunilai)", href: "https://anbagam.org/vichur/" },
+                { label: "Inside Our Home", href: "https://anbagam.org/inside-our-home/" },
+                { label: "Amenities", href: "https://anbagam.org/amenities/" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-200/70 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <h4 className="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-4">Updates</h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Pulse", href: "https://anbagam.org/pulse/" },
+                { label: "2025", href: "https://anbagam.org/2025/" },
+                { label: "Reports", href: "https://anbagam.org/reports/" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-200/70 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Get Involved */}
+          <div>
+            <h4 className="text-xs font-semibold text-blue-300 uppercase tracking-widest mb-4">Get Involved</h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "Donate", href: "https://anbagam.org/donate/" },
+                { label: "Be a Volunteer", href: "https://anbagam.org/be-a-volunteer/" },
+                { label: "Appeal", href: "https://anbagam.org/appeal/" },
+                { label: "FAQs", href: "https://anbagam.org/faqs/" },
+                { label: "Contact Us", href: "https://anbagam.org/contact/" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-200/70 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-blue-900/60 pt-8 text-center">
 
         {/* Social links */}
         <div className="flex items-center justify-center gap-4 mb-8">
@@ -104,9 +191,11 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="pt-6 border-t border-blue-900/60 text-xs text-blue-300">
+        <div className="pt-6 text-xs text-blue-300">
           © {new Date().getFullYear()} Anbagam · TERDOD. Operating since 1999.
         </div>
+
+        </div>{/* close .text-center */}
       </div>
     </footer>
   );
