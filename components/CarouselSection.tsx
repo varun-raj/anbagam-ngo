@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 
-const ALL = Array.from({ length: 18 }, (_, i) => `/media/gallery-${String(i + 1).padStart(2, "0")}.jpg`);
+const ALL = Array.from({ length: 20 }, (_, i) => `/media/gallery-${String(i + 1).padStart(2, "0")}.jpg`);
 
-const ROW1 = [...ALL.slice(0, 9),  ...ALL.slice(0, 9)];
-const ROW2 = [...ALL.slice(9, 18), ...ALL.slice(9, 18)];
+const ROW1 = [...ALL.slice(0, 10),  ...ALL.slice(0, 10)];
+const ROW2 = [...ALL.slice(10, 20), ...ALL.slice(10, 20)];
 
 export function CarouselSection() {
   const [lightbox, setLightbox] = useState<number | null>(null);
