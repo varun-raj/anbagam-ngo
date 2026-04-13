@@ -1,8 +1,8 @@
 "use client";
 
+import { UPI_ID } from "@/lib/config";
 import { useState } from "react";
 
-const UPI_ID = "mpmohamedrafi617317.rzp@rxairtel";
 
 const impactTiers = [
   {
