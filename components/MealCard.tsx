@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { type Meal } from "@/lib/config";
 import { initializeRazorpay } from "@/lib/razorpay-client";
+import { ThankYouModal } from "@/components/ThankYouModal";
 
 interface MealCardProps {
   meal: Meal;
@@ -11,6 +12,7 @@ interface MealCardProps {
 
 export function MealCard({ meal, isLast = false }: MealCardProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [showThanks, setShowThanks] = useState(false);
 
   const handleDonate = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -47,7 +49,7 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
         orderId: order.id,
         onSuccess: (response) => {
           console.log("Payment Successful:", response);
-          alert("Thank you for your donation!");
+          setShowThanks(true);
         },
         onCancel: () => {
           console.log("Payment Cancelled");
@@ -62,11 +64,13 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
   };
 
   return (
-    <div
-      className={`py-4 px-4 sm:px-5 hover:bg-blue-50/60 transition-colors duration-150 ${
-        !isLast ? "border-b border-blue-100" : ""
-      }`}
-    >
+    <>
+      <div
+        className={`py-4 px-4 sm:px-5 hover:bg-blue-50/60 transition-colors duration-150 ${
+          !isLast ? "border-b border-blue-100" : ""
+        }`}
+      >
+        {/* ... (rest of the component) ... */}
       {/* ── Mobile layout ── */}
       <div className="sm:hidden grid grid-cols-[40px_1fr] gap-x-3">
         {/* Icon — spans both rows */}
@@ -133,6 +137,12 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
           )}
         </button>
       </div>
-    </div>
+
+      <ThankYouModal
+        isOpen={showThanks}
+        onClose={() => setShowThanks(false)}
+        amount={meal.amount}
+      />
+    </>
   );
 }
