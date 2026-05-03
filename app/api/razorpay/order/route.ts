@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server";
-import Razorpay from "razorpay";
 
-export const runtime = "nodejs";
-
-const razorpay = new Razorpay({
-  key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+export const runtime = "edge";
 
 export async function POST(request: Request) {
   try {
@@ -16,14 +10,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Amount is required" }, { status: 400 });
     }
 
-    const options = {
-      amount: amount * 100, // amount in smallest currency unit (paise)
-      currency,
-      receipt,
-      notes,
-    };
+    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
-    const order = await razorpay.orders.create(options);
+    if (!keyId || !keySecret) {
+      return NextResponse.json({ error: "Razorpay keys missing" }, { status: 500 });
+    }
+
+    // Direct fetch to Razorpay API for Edge compatibility
+    const response = await fetch("https://api.razorpay.com/v1/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(`${keyId}:${keySecret}`)}`,
+      },
+      body: JSON.stringify({
+        amount: Math.round(amount * 100), // amount in paise
+        currency,
+        receipt,
+        notes,
+      }),
+    });
+
+    const order = await response.json();
+
+    if (!response.ok) {
+      return NextResponse.json({ error: order.error?.description || "Razorpay API error" }, { status: response.status });
+    }
 
     return NextResponse.json(order);
   } catch (error) {
