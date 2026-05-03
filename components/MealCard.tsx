@@ -1,5 +1,8 @@
-// components/MealCard.tsx
-import { buildUpiLink, UPI_ID, type Meal } from "@/lib/config";
+"use client";
+
+import { useState } from "react";
+import { type Meal } from "@/lib/config";
+import { initializeRazorpay } from "@/lib/razorpay-client";
 
 interface MealCardProps {
   meal: Meal;
@@ -7,7 +10,56 @@ interface MealCardProps {
 }
 
 export function MealCard({ meal, isLast = false }: MealCardProps) {
-  const upiLink = buildUpiLink(meal.amount, meal.note);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDonate = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      // 1. Create order on server
+      const response = await fetch("/api/razorpay/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: meal.amount,
+          receipt: `receipt_${meal.name}_${Date.now()}`,
+          notes: {
+            meal: meal.name,
+            note: meal.note,
+          },
+        }),
+      });
+
+      const order = await response.json();
+
+      if (order.error) {
+        throw new Error(order.error);
+      }
+
+      // 2. Initialize Razorpay Checkout
+      await initializeRazorpay({
+        amount: meal.amount,
+        name: meal.name,
+        description: `Donate for ${meal.name} at Anbagam`,
+        orderId: order.id,
+        onSuccess: (response) => {
+          console.log("Payment Successful:", response);
+          alert("Thank you for your donation!");
+        },
+        onCancel: () => {
+          console.log("Payment Cancelled");
+        },
+      });
+    } catch (error) {
+      console.error("Donation error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div
@@ -34,22 +86,22 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
 
         {/* Row 2 right: donate (left) + subtitle (right) */}
         <div className="flex items-center justify-between gap-2 mt-2">
-          <a
-            href={upiLink}
-            className="inline-flex items-center gap-1 bg-blue-600 active:bg-blue-800 text-white text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
+          <button
+            onClick={handleDonate}
+            disabled={isLoading}
+            className="inline-flex items-center gap-1 bg-blue-600 active:bg-blue-800 text-white text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Donate
-            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
+            {isLoading ? "Processing..." : "Donate"}
+            {!isLoading && (
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            )}
+          </button>
           <p className="text-xs text-slate-500 uppercase tracking-wide">
             Daily contribution
           </p>
         </div>
-        <p className="col-start-2 text-[11px] text-slate-400 mt-1">
-          UPI: {UPI_ID}
-        </p>
       </div>
 
       {/* ── Desktop layout: single row ── */}
@@ -64,22 +116,22 @@ export function MealCard({ meal, isLast = false }: MealCardProps) {
           <p className="text-xs text-slate-500 uppercase tracking-wide mt-0.5">
             Daily contribution
           </p>
-          <p className="text-[11px] text-slate-400 mt-0.5">
-            UPI: {UPI_ID}
-          </p>
         </div>
         <span className="flex-shrink-0 text-xl font-bold text-blue-800 mr-2">
           ₹{meal.amount.toLocaleString("en-IN")}
         </span>
-        <a
-          href={upiLink}
-          className="flex-shrink-0 inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
+        <button
+          onClick={handleDonate}
+          disabled={isLoading}
+          className="flex-shrink-0 inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Donate
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
+          {isLoading ? "Processing..." : "Donate"}
+          {!isLoading && (
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          )}
+        </button>
       </div>
     </div>
   );

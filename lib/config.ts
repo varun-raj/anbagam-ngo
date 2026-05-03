@@ -1,12 +1,10 @@
 // lib/config.ts
 
-export const UPI_ID = "terdod@sbi";
-
 export type Meal = {
   name: string;
   icon: string;
   amount: number;
-  note: string; // used in UPI transaction note
+  note: string; // used in notes
 };
 
 export type Center = {
@@ -55,7 +53,3 @@ export const centers: Center[] = [
     ],
   },
 ];
-
-export function buildUpiLink(amount: number, note: string): string {
-  return `upi://pay?pa=${UPI_ID}&pn=Anbagam&am=${amount}&tn=${note}&cu=INR`;
-}
