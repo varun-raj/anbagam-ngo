@@ -99,6 +99,13 @@ export async function POST(request: Request) {
 
   const rawBody = await request.text();
   const valid = await verifySignature(rawBody, signature, secret);
+
+  // TEMP DEBUG — remove after verifying env wiring
+  console.log("[webhook] secret_prefix:", secret.slice(0, 10), "len:", secret.length);
+  console.log("[webhook] sig_received:", signature);
+  console.log("[webhook] body_len:", rawBody.length, "body_first100:", rawBody.slice(0, 100));
+  console.log("[webhook] valid:", valid);
+
   if (!valid) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
