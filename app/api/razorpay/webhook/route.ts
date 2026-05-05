@@ -5,7 +5,7 @@ export const runtime = "edge";
 
 const NOTIFICATION_RECIPIENTS = ["varun@foundrysoft.co"];
 
-async function verifySignature(rawBody: string, signature: string, secret: string) {
+async function computeSignature(rawBody: string, secret: string) {
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
     "raw",
@@ -15,14 +15,16 @@ async function verifySignature(rawBody: string, signature: string, secret: strin
     ["sign"],
   );
   const sigBuf = await crypto.subtle.sign("HMAC", key, encoder.encode(rawBody));
-  const expected = Array.from(new Uint8Array(sigBuf))
+  return Array.from(new Uint8Array(sigBuf))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
+}
 
-  if (expected.length !== signature.length) return false;
+function timingSafeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
   let mismatch = 0;
-  for (let i = 0; i < expected.length; i++) {
-    mismatch |= expected.charCodeAt(i) ^ signature.charCodeAt(i);
+  for (let i = 0; i < a.length; i++) {
+    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
   }
   return mismatch === 0;
 }
@@ -88,26 +90,37 @@ function buildEmail(event: string, payment: any) {
 
 export async function POST(request: Request) {
   const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+  console.log("[webhook] env_secret_present:", !!secret, "secret_len:", secret?.length ?? 0, "secret_prefix:", secret?.slice(0, 10));
+
   if (!secret) {
     return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 });
   }
 
   const signature = request.headers.get("x-razorpay-signature");
+  const allHeaders: Record<string, string> = {};
+  request.headers.forEach((v, k) => { allHeaders[k] = v; });
+  console.log("[webhook] headers:", JSON.stringify(allHeaders));
+  console.log("[webhook] sig_received:", signature);
+
   if (!signature) {
     return NextResponse.json({ error: "Missing signature" }, { status: 400 });
   }
 
   const rawBody = await request.text();
-  const valid = await verifySignature(rawBody, signature, secret);
+  const expected = await computeSignature(rawBody, secret);
+  const valid = timingSafeEqual(expected, signature);
 
-  // TEMP DEBUG — remove after verifying env wiring
-  console.log("[webhook] secret_prefix:", secret.slice(0, 10), "len:", secret.length);
-  console.log("[webhook] sig_received:", signature);
-  console.log("[webhook] body_len:", rawBody.length, "body_first100:", rawBody.slice(0, 100));
-  console.log("[webhook] valid:", valid);
+  console.log("[webhook] body_len:", rawBody.length);
+  console.log("[webhook] body_full:", rawBody);
+  console.log("[webhook] body_b64:", btoa(rawBody.slice(0, 200)));
+  console.log("[webhook] sig_expected:", expected);
+  console.log("[webhook] sig_match:", valid);
 
   if (!valid) {
-    return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Invalid signature", expected, received: signature },
+      { status: 401 },
+    );
   }
 
   let payload: any;
@@ -150,9 +163,12 @@ export async function POST(request: Request) {
         },
       }),
     );
-  } catch (err) {
-    console.error("SES send failed:", err);
-    return NextResponse.json({ error: "Email send failed" }, { status: 500 });
+  } catch (err: any) {
+    console.error("[webhook] SES send failed:", err?.name, err?.message, err?.$metadata, err?.stack);
+    return NextResponse.json(
+      { error: "Email send failed", name: err?.name, message: err?.message },
+      { status: 500 },
+    );
   }
 
   return NextResponse.json({ ok: true });
