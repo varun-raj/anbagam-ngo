@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
-import { Heart, X, CheckCircle2, Share2 } from "lucide-react";
+import { Heart, X, CheckCircle2 } from "lucide-react";
 
 interface ThankYouModalProps {
   isOpen: boolean;
@@ -109,18 +109,12 @@ export function ThankYouModal({ isOpen, onClose, amount }: ThankYouModalProps) {
               We'll send your receipt to your registered email shortly.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={onClose}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-200 transition-all active:scale-[0.98]"
-              >
-                Return to Home
-              </button>
-              <button className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border border-blue-100 text-blue-600 font-bold hover:bg-blue-50 transition-all active:scale-[0.98]">
-                <Share2 className="w-5 h-5" />
-                Share
-              </button>
-            </div>
+            <button
+              onClick={onClose}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-200 transition-all active:scale-[0.98]"
+            >
+              Return to Home
+            </button>
           </div>
         </motion.div>
       </div>
