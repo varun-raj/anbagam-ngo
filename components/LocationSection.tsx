@@ -15,8 +15,7 @@ const accentColors = [
 ];
 
 export function LocationSection({ center, index }: LocationSectionProps) {
-  const dailyTotal = center.meals.reduce((sum, m) => sum + m.amount, 0);
-  const perPersonAmount = Math.round(dailyTotal / center.residents);
+  const perPersonAmount = 100;
 
   return (
     <section className="py-10 sm:py-12 px-4 sm:px-6 bg-slate-50">
