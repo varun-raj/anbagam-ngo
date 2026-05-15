@@ -22,7 +22,6 @@ export const centers: Center[] = [
     residents: 60,
     mapUrl: "https://maps.app.goo.gl/j62saTVfFysDU7E47",
     meals: [
-      { name: "Test Meal",   icon: "🧪", amount: 10,   note: "Test+Otteri" },
       { name: "Breakfast", icon: "🌅", amount: 3500, note: "Breakfast+Otteri" },
       { name: "Lunch",     icon: "🍽️",  amount: 5000, note: "Lunch+Otteri" },
       { name: "Dinner",    icon: "🌙", amount: 5000, note: "Dinner+Otteri" },

@@ -1,5 +1,6 @@
 // components/LocationSection.tsx
 import { MealCard } from "@/components/MealCard";
+import { PerPersonCard } from "@/components/PerPersonCard";
 import { type Center } from "@/lib/config";
 
 interface LocationSectionProps {
@@ -14,6 +15,9 @@ const accentColors = [
 ];
 
 export function LocationSection({ center, index }: LocationSectionProps) {
+  const dailyTotal = center.meals.reduce((sum, m) => sum + m.amount, 0);
+  const perPersonAmount = Math.round(dailyTotal / center.residents);
+
   return (
     <section className="py-10 sm:py-12 px-4 sm:px-6 bg-slate-50">
       <div className="max-w-5xl mx-auto">
@@ -54,13 +58,14 @@ export function LocationSection({ center, index }: LocationSectionProps) {
 
         {/* Meal list */}
         <div className="bg-white rounded-xl border border-blue-100 shadow-sm overflow-hidden">
-          {center.meals.map((meal, i) => (
-            <MealCard
-              key={meal.name}
-              meal={meal}
-              isLast={i === center.meals.length - 1}
-            />
+          {center.meals.map((meal) => (
+            <MealCard key={meal.name} meal={meal} />
           ))}
+          <PerPersonCard
+            centerName={center.name}
+            location={center.location}
+            unitAmount={perPersonAmount}
+          />
         </div>
       </div>
     </section>
